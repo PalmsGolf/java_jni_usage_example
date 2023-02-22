@@ -10,19 +10,22 @@ extern "C" {
 /*
  * Class:     com_jnidemo_Main
  * Method:    goThere
- * Signature: (Lcom/jnidemo/MessageProvider;)V
+ * Signature: (Lcom/jnidemo/MessageProvider;)Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_com_jnidemo_Main_goThere
-  (JNIEnv *env, jclass rClass, jobject mProvider)
-{
-    printf("start native function ");
+JNIEXPORT jstring JNICALL Java_com_jnidemo_Main_goThere
+   (JNIEnv *env, jclass rClass, jobject mProvider) {
 
+    jstring jstr = (*env)->NewStringUTF(env, "special message for you");
     jclass cls = (*env)->GetObjectClass(env, mProvider);
-    jmethodID method = (*env)->GetMethodID(env, cls, "printMessage", "()V");
-    (*env)->CallVoidMethod(env, mProvider, method);
+    jmethodID method = (*env)->GetMethodID(env, cls, "setPrivateMessage", "(Ljava/lang/String;)V");
 
-    printf("\n end native function");
-}
+    (*env)->CallVoidMethod(env, mProvider, method, jstr);
+
+    char msg[20] = "Success";
+    jstring result = (*env)->NewStringUTF(env, msg);
+
+    return result;
+ }
 
 #ifdef __cplusplus
 }

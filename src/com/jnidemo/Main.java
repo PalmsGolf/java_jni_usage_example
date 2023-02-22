@@ -2,12 +2,15 @@ package com.jnidemo;
 
 public class Main {
 
-    static native void goThere(MessageProvider messageProvider);
+    private static native String goThere(MessageProvider messageProvider);
 
     public static void main(String[] args) {
         System.loadLibrary("TestLib");
 
         final MessageProvider mProvider = new MessageProvider();
-        goThere(mProvider);
+        mProvider.printPrivateMessage();
+        System.out.println("NF result: " + goThere(mProvider));
+
+        mProvider.printPrivateMessage();
     }
 }
