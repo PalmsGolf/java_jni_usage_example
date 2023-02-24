@@ -1,6 +1,6 @@
 JAVA JNI usage example. 
 
-How to work with JNI(with examples in scope of this projext):
+How to work with JNI(with examples in scope of this projeсt):
 
 1) Declare yor native function in JAVA. Example "static native void goThere(MessageProvider messageProvider);"
 2) Generate native headers. Example: "javac .\Main.java .\Callback.java -h ./generated"
